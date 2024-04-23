@@ -1,0 +1,57 @@
+#include <math.h>
+#include <stdio.h>
+#define pi =3.1416
+void calculate();
+int main()
+{
+	calculate();
+	return 0;
+}
+void calculate()
+{
+	int xn[8];
+	float Xr[8];
+	float Xi[8];
+	float rel[8];
+	float img[8];
+	int i, k, n, N = 8;
+	for (i = 0; i < 8; i++) {
+		printf("Enter the value "
+			"of x[%d]: ",
+			i);
+		scanf("%d", &xn[i]);
+	}
+	for (k = 0; k < N; k++) {
+		Xr[k] = 0;
+		Xi[k] = 0;
+		for (n = 0; n < 8; n++) {
+			Xr[k]
+				= (Xr[k]
+				+ xn[n] * cos(2 * 3.141592 * k * n / N));
+			Xi[k]
+				= (Xi[k]
+				- xn[n] * sin(2 * 3.141592 * k * n / N));
+		}
+		printf("(%f) + j(%f)\n", Xr[k], Xi[k]);
+	}
+	printf("\n");
+	for(i=0;i<8;i++){
+		for(k=0;k<8;k++){
+			rel[i]+=Xr[k]*cos(2*3.1416*i*k/N)+(-1)*Xi[k]*sin(2*3.1416*i*k/N);
+			img[i]+=Xi[k]*cos(2*3.1416*i*k/N)+Xr[k]*sin(2*3.1416*i*k/N);
+		}
+		rel[i]=rel[i]/N;
+		img[i]=img[i]/N;
+		printf("%f + i%f\n",rel[i],img[i]);
+	}
+}
+
+
+
+
+Codeof Matlab:
+clear all
+close all
+a=[1 2 3 4 1 1 1 9];
+x=fft(a)
+y=ifft(x)
